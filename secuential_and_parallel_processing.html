@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 1 - Informe de resultados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        paper: '#ffffff',
+                        parchment: '#f7f5f0',
+                        ink: '#1a1a1a',
+                        'ink-light': '#4a4a4a',
+                        borderline: '#d1cdc5'
+                    },
+                    fontFamily: {
+                        serif: ['"Lora"', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-parchment text-ink antialiased min-h-screen p-4 md:p-8 selection:bg-ink selection:text-paper">
+
+    <!-- CONTENEDOR TIPO DOCUMENTO -->
+    <div class="max-w-5xl mx-auto bg-paper border border-borderline shadow-sm p-8 md:p-16">
+        
+        <!-- ENCABEZADO CLÁSICO -->
+        <header class="border-b-4 border-ink pb-6 mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-bold uppercase tracking-tight mb-2">
+                    Informe de Resultados
+                </h1>
+                <h2 class="text-xl text-ink-light italic">
+                    Procesamiento Secuencial y Paralelo de Textos
+                </h2>
+            </div>
+            <div class="text-left md:text-right text-sm">
+                <p class="font-bold uppercase tracking-wider mb-1">Kevin Sebastián Sinchi Naula</p>
+                <p class="text-ink-light mb-1">Actividad Práctica 01 | Java Threads</p>
+                <a href="https://github.com/elsebasdev1/secuential_and_parallel_processing" target="_blank" class="font-mono underline hover:text-ink-light transition-colors">
+                    Repositorio GitHub
+                </a>
+            </div>
+        </header>
+
+        <!-- SECCIÓN: DESCRIPCIÓN Y HARDWARE -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-12">
+            
+            <!-- DESCRIPCIÓN -->
+            <div class="lg:col-span-2">
+                <h3 class="text-lg font-bold uppercase tracking-wider border-b border-borderline pb-2 mb-4">
+                    I. Descripción de la Solución
+                </h3>
+                <p class="leading-relaxed mb-4 text-justify">
+                    Se desarrolló un motor de inferencia léxica utilizando Java. Para garantizar la exactitud de los datos frente al idioma español, se forzó la lectura NIO en <code class="bg-gray-100 border border-gray-300 px-1 py-0.5 text-sm font-mono text-ink">UTF-8</code> y se procesaron los límites de palabras mediante expresiones regulares compatibles con caracteres Unicode (<code class="bg-gray-100 border border-gray-300 px-1 py-0.5 text-sm font-mono text-ink">\p{L}</code>).
+                </p>
+                <p class="leading-relaxed text-justify">
+                    La implementación multihilo utiliza particionamiento matemático para dividir el arreglo en memoria según la cantidad de núcleos asignados. Esto aísla las operaciones de cada hilo para evadir condiciones de carrera y cuellos de botella de entrada/salida.
+                </p>
+            </div>
+
+            <!-- HARDWARE --> 
+             <div class="bg-parchment border border-borderline p-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-center border-b border-borderline pb-2 mb-4"> Entorno de Ejecución </h3>
+
+                <!-- PROCESADOR --> <div class="bg-white/50 border border-borderline p-3 mb-3"> <span class="block text-xs font-bold uppercase tracking-wider text-ink-light mb-1"> Procesador (CPU) </span> <p class="text-sm font-bold mb-3">AMD Ryzen 9 6900HS</p>
+
+                <div class="grid grid-cols-3 gap-2 border-t border-borderline pt-3"> <div> <span class="block text-xs text-ink-light mb-1">Núcleos</span> <span class="text-sm font-mono font-bold">8</span> </div> <div> <span class="block text-xs text-ink-light mb-1">Hilos</span> <span class="text-sm font-mono font-bold">16</span> </div> <div> <span class="block text-xs text-ink-light mb-1">Frecuencia</span> <span class="text-sm font-mono font-bold">4.9 GHz</span> </div> </div> </div>
+
+                <!-- MEMORIA RAM --> <div class="bg-white/50 border border-borderline p-3"> <span class="block text-xs font-bold uppercase tracking-wider text-ink-light mb-1"> Memoria RAM </span> <span class="text-lg font-bold font-mono">32 GB</span> </div>
+
+            </div>
+        </div>
+
+        <!-- TABLA DE RENDIMIENTO -->
+        <div class="mb-12">
+            <h3 class="text-lg font-bold uppercase tracking-wider border-b border-borderline pb-2 mb-6">
+                II. Métricas de Rendimiento (Promedio 5 iteraciones)
+            </h3>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse font-mono text-sm">
+                    <thead>
+                        <tr class="border-y-2 border-ink bg-parchment">
+                            <th class="p-3 font-bold uppercase tracking-wider">Conjunto de Datos</th>
+                            <th class="p-3 font-bold uppercase tracking-wider text-center">Hilos</th>
+                            <th class="p-3 font-bold uppercase tracking-wider text-right">Tiempo Promedio</th>
+                            <th class="p-3 font-bold uppercase tracking-wider text-right">Aceleración</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-borderline">
+                        <!-- Bloque Original -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="p-3">Original (386,793 palabras)</td>
+                            <td class="p-3 text-center">1</td>
+                            <td class="p-3 text-right">4.8500 ms</td>
+                            <td class="p-3 text-right">1.00x</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="p-3">Original</td>
+                            <td class="p-3 text-center">2</td>
+                            <td class="p-3 text-right">2.6681 ms</td>
+                            <td class="p-3 text-right">1.82x</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="p-3">Original</td>
+                            <td class="p-3 text-center font-bold">4</td>
+                            <td class="p-3 text-right font-bold">1.4155 ms</td>
+                            <td class="p-3 text-right font-bold">3.43x</td>
+                        </tr>
+                        <!-- Bloque Ampliado -->
+                        <tr class="bg-gray-50 hover:bg-gray-100 transition-colors border-t-2 border-ink">
+                            <td class="p-3">Ampliado x100 (38,679,300 palabras)</td>
+                            <td class="p-3 text-center">1</td>
+                            <td class="p-3 text-right">309.6917 ms</td>
+                            <td class="p-3 text-right">1.00x</td>
+                        </tr>
+                        <tr class="bg-gray-50 hover:bg-gray-100 transition-colors">
+                            <td class="p-3">Ampliado x100</td>
+                            <td class="p-3 text-center">2</td>
+                            <td class="p-3 text-right">164.0379 ms</td>
+                            <td class="p-3 text-right">1.89x</td>
+                        </tr>
+                        <tr class="bg-gray-50 hover:bg-gray-100 transition-colors border-b-2 border-ink">
+                            <td class="p-3">Ampliado x100</td>
+                            <td class="p-3 text-center font-bold">4</td>
+                            <td class="p-3 text-right font-bold">85.3444 ms</td>
+                            <td class="p-3 text-right font-bold">3.63x</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ANÁLISIS DE RESULTADOS -->
+        <div class="mb-12">
+            <h3 class="text-lg font-bold uppercase tracking-wider border-b border-borderline pb-2 mb-6">
+                III. Análisis Técnico
+            </h3>
+            
+            <div class="space-y-6">
+                <div>
+                    <h4 class="font-bold text-ink mb-2">1. ¿Qué diferencias se observan entre los tiempos de ejecución secuencial y paralela?</h4>
+                    <p class="leading-relaxed text-justify">
+                        La ejecución secuencial presenta un crecimiento estrictamente lineal frente al volumen de datos. Al delegar la tarea a hilos paralelos, el tiempo de ejecución cae notoriamente y de manera proporcional a la cantidad de núcleos físicos asignados, logrando procesar casi 40 millones de palabras en cerca de 85 milisegundos frente a los 309 milisegundos del método secuencial.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-ink mb-2">2. ¿Cómo influye el número de hilos en el rendimiento?</h4>
+                    <p class="leading-relaxed text-justify">
+                        Escala de manera agresiva pero con cierta fricción. Pasar de 1 a 2 hilos arrojó una mejora del <strong>x1.89</strong>. Al emplear 4 hilos, se obtuvo <strong>x3.63</strong> de aceleración en lugar de un 4.00x perfecto. Esta pérdida de más o menos x0.37, parece que corresponde al <em>overhead</em> del sistema operativo al orquestar los hilos y al bloqueo generado por la instrucción de espera (<code class="font-mono text-sm bg-gray-100 px-1">Thread.join()</code>).
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-ink mb-2">3. ¿Qué sucede al incrementar el tamaño del documento?</h4>
+                    <p class="leading-relaxed text-justify">
+                        Al multiplicar el libro por 100, la eficiencia del procesamiento paralelo se optimiza. En arreglos cortos, el tiempo que tarda la CPU en crear los hilos penaliza el cálculo. Sin embargo, al enfrentar más de 38 millones de palabras, el costo de instanciación baja por completo, permitiendo que la arquitectura extraiga el máximo rendimiento computacional.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-ink mb-2">4. ¿El procesamiento paralelo siempre es más rápido?</h4>
+                    <p class="leading-relaxed text-justify">
+                        <strong>No.</strong> Aunque en estas pruebas específicas que partiendo desde 386k de palabras. A mi parecer el paralelismo ganó pero existe un umbral crítico de carga de trabajo. Si el arreglo de texto hubiera contenido únicamente 1 000 palabras, el método secuencial terminaría el cálculo mucho antes de que el núcleo del sistema operativo terminara de inicializar los contextos de memoria para los múltiples hilos.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONCLUSIONES -->
+        <div>
+            <h3 class="text-lg font-bold uppercase tracking-wider border-b border-borderline pb-2 mb-6">
+                IV. Conclusiones de la Práctica
+            </h3>
+            <ul class="list-disc pl-6 space-y-3 leading-relaxed">
+                <li>
+                    La división matemática de rangos con el índice de inicio y fin sobre un espacio de memoria compartido evita la sobrecarga de instanciar sub-arreglos y garantiza la inexistencia de bloqueos por condiciones de carrera.
+                </li>
+                <li>
+                    El procesador Ryzen provisto de 8 núcleos físicos, permitió evidenciar que la máquina virtual de Java gestiona la concurrencia nativa con una latencia operativa mínima, cosa que no podríamos conseguir con lenguajes de alto nivel.
+                </li>
+                <li>
+                    La preservación del método secuencial es clave en el diseño de algoritmos paralelos porque provee el tiempo base ineludible para el cálculo de la Ley de Amdahl.
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+</body>
+</html>
